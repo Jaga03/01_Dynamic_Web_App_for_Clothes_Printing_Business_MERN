@@ -1,6 +1,6 @@
-# 👕 Custom Clothes Printing Web Application
+# 👕 StichStudio – Custom Clothes Printing Web Application
 
-A fully responsive, secure, and scalable e-commerce platform developed for **Zaalima Development Pvt. Ltd.**, where customers can personalize apparel by uploading custom designs, preview them on product mockups, and place orders. Admins can manage inventory, process orders, and update delivery statuses. Built with the **MERN stack**, this solution combines modern UI, secure authentication, and seamless payment integration.
+A fully responsive, secure, and user-friendly e-commerce platform developed for **Zaalima Development Pvt. Ltd.**, where users must first log in or register to access the application. Customers can personalize apparel by uploading custom designs, preview them on clothing mockups, and place orders. Admins can manage products and update order statuses. Built using the **MERN Stack**, integrated with **Cloudinary** for image uploads and **Stripe** for secure payments.
 
 ---
 
@@ -19,118 +19,123 @@ Bangalore, India
 
 ---
 
-## 📸 Preview
+## 🖼️ Preview
 
 ![App Preview](https://cdn.shopify.com/app-store/listing_images/3dd87416a3b1e12a9ef3604aaaaf4d1e/desktop_screenshot/CIufoveT_YEDEAE=.png?height=720&width=1280)
 
 ---
 
-## 🧱 Tech Stack
+## 🔐 Login-First Design Flow
 
-| Layer      | Tools/Technologies                                                                 |
-|------------|-------------------------------------------------------------------------------------|
-| Frontend   | React.js, Tailwind CSS, React Router, React Hook Form, Axios, Framer Motion        |
-| Backend    | Node.js, Express.js, MongoDB Atlas, JWT (Auth), Bcrypt.js, CORS                    |
-| File Upload| Cloudinary + Multer                                                                |
-| Payments   | Stripe API                                                                         |
-| Deployment | Vercel (Frontend), Render (Backend), MongoDB Atlas (Database)                     |
+- The **Login Page is the default entry point** (`/login`)
+- Users must **register or log in** before accessing any content
+- All pages like Home, Products, Cart, Profile, and Admin Dashboard are **JWT protected**
+- Unauthorized users are automatically redirected to the login page
 
 ---
 
-## 💼 Core Functionalities
+## 📦 Tech Stack
 
-### 👤 Customer Features
-- Register & login securely (JWT-based)
-- Browse products with filters (size, color, type)
-- Upload personal design (PNG/JPEG) for T-shirts
-- Live preview on clothing mockups
-- Add to cart & update quantity
-- Checkout via Stripe
-- Track current and past orders
-- View full order history
-
-### 🔐 Admin Features
-- Admin login with secure access
-- Add, update, or delete products
-- Manage product variants (size, color, type)
-- View all user orders with filter
-- Update order status (Pending → Shipped → Delivered)
-- Dashboard overview of sales and users
+| Layer        | Tools/Technologies                        |
+|--------------|--------------------------------------------|
+| Frontend     | React.js, Tailwind CSS, React Router v6    |
+| Backend      | Node.js, Express.js, MongoDB Atlas         |
+| Authentication | JWT, bcryptjs                            |
+| File Upload  | Cloudinary, Multer                         |
+| Payments     | Stripe API                                 |
+| Hosting      | Vercel (Frontend), Render (Backend)        |
 
 ---
 
-## 📁 Folder Structure
+## 🎨 Main Features
+
+### 👤 For Users
+- Register/Login (JWT-based)
+- Browse and filter products
+- Upload design or add text
+- Live mockup preview
+- Add to cart and checkout
+- Stripe payment integration
+- View order history and track status
+
+### 🛡️ For Admins
+- Login securely as admin
+- Add/Edit/Delete products
+- Manage inventory variants (size, color, type)
+- View all orders
+- Update order statuses (Pending → Delivered)
+
+---
+
+## 🗂️ Full Folder Structure
 
 ```
-custom-clothes-printing-app/
+stichstudio/
 ├── client/                         # React Frontend
-│   ├── public/
+│   ├── public/                     # Public static assets (favicon, index.html)
 │   └── src/
-│       ├── assets/                # App-wide static assets
-│       ├── components/            # Navbar, Footer, ProductCard, etc.
-│       ├── pages/                 # Home, ProductDetails, Cart, Profile, AdminDashboard
-│       ├── services/              # Axios services (auth, product, order APIs)
-│       ├── contexts/              # Auth context, Cart context
-│       ├── App.tsx                # Main routing & layout
-│       └── index.tsx              # Entry point
-
-├── server/                         # Node + Express Backend
-│   ├── config/                    # Cloudinary, Stripe, MongoDB connection
-│   ├── controllers/              # Logic for products, auth, orders
-│   ├── middleware/               # JWT auth, error handler
-│   ├── models/                   # MongoDB Mongoose Schemas
+│       ├── assets/                # Static images and mockups
+│       ├── components/            # Shared components
+│       │   ├── Navbar.tsx
+│       │   ├── Footer.tsx
+│       │   └── PrivateRoute.tsx
+│       ├── contexts/              # Auth & Cart Context Providers
+│       │   ├── AuthContext.tsx
+│       │   └── CartContext.tsx
+│       ├── hooks/                 # Custom React hooks
+│       │   └── useAuth.ts
+│       ├── pages/                 # Main page views
+│       │   ├── Login.tsx
+│       │   ├── Register.tsx
+│       │   ├── Home.tsx
+│       │   ├── Product.tsx
+│       │   ├── Cart.tsx
+│       │   ├── Profile.tsx
+│       │   └── AdminDashboard.tsx
+│       ├── services/              # Axios API services
+│       │   ├── authService.ts
+│       │   ├── productService.ts
+│       │   └── orderService.ts
+│       ├── App.tsx                # Application routing
+│       └── main.tsx               # React DOM render
+│
+├── server/                         # Node Backend
+│   ├── config/                    # Cloudinary, Stripe, DB config
+│   │   ├── cloudinary.js
+│   │   ├── db.js
+│   │   └── stripe.js
+│   ├── controllers/              # Business logic
+│   │   ├── authController.js
+│   │   ├── productController.js
+│   │   └── orderController.js
+│   ├── middleware/               # JWT protection, error handlers
+│   │   ├── authMiddleware.js
+│   │   └── errorHandler.js
+│   ├── models/                   # Mongoose schemas
 │   │   ├── User.js
 │   │   ├── Product.js
-│   │   ├── Order.js
-│   ├── routes/                   # Express routes (auth, product, order)
-│   ├── utils/                    # Token handling, image filters
-│   ├── server.js                 # Entry point for backend
-│   └── .env                      # Environment configuration
-
-└── README.md
+│   │   └── Order.js
+│   ├── routes/                   # Express REST API routes
+│   │   ├── auth.js
+│   │   ├── products.js
+│   │   └── orders.js
+│   ├── utils/                    # Token helpers, validators
+│   │   └── generateToken.js
+│   ├── .env                      # Environment config
+│   ├── server.js                 # Entry point
+│   └── README.md
 ```
 
 ---
 
-## 🗓️ Development Timeline
-
-### ✅ Week 1: Setup + Authentication
-- Initialized React + Tailwind frontend
-- Set up Express.js backend with MongoDB Atlas
-- Created `User` schema and JWT auth system
-- Implemented login, registration & token-based access control
-
-### ✅ Week 2: Product & Design Upload
-- Built `Product` schema with size, color, and type variants
-- Product listing, detail, and filtering functionality
-- Integrated Cloudinary for custom design uploads
-- Preview uploaded design on a mockup T-shirt
-- Cart functionality using React Context API
-
-### ✅ Week 3: Payments & Admin Panel
-- Integrated Stripe for secure checkout
-- Created order schema and user order flow
-- Developed Admin Dashboard to manage products and view orders
-- Implemented order status updates
-
-### ✅ Week 4: User Profile, Order History & Deployment
-- Built user profile with past order history
-- Added order tracking and filtering
-- Final mobile responsiveness testing
-- Deployed frontend to Vercel, backend to Render
-
----
-
-## 🔧 Setup Instructions
+## 🧩 Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Jaga03/custom-clothes-printing-app.git
-cd custom-clothes-printing-app
+git clone https://github.com/Jaga03/stichstudio.git
+cd stichstudio
 ```
-
----
 
 ### 2. Install Dependencies
 
@@ -144,18 +149,16 @@ cd ../server
 npm install
 ```
 
----
-
-### 3. Environment Variables
+### 3. Configure Environment Variables
 
 #### `/server/.env`
 ```
 PORT=5000
-MONGO_URI=your_mongodb_uri
+MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 STRIPE_SECRET_KEY=your_stripe_secret_key
 ```
 
@@ -164,64 +167,60 @@ STRIPE_SECRET_KEY=your_stripe_secret_key
 VITE_API_URL=http://localhost:5000/api
 ```
 
----
-
-### 4. Run Locally
+### 4. Run the App Locally
 
 ```bash
-# Start Backend
+# Backend
 cd server
 npm run dev
 
-# Start Frontend
+# Frontend
 cd ../client
 npm run dev
 ```
 
-Visit: `http://localhost:3000`
+> Visit the app at `http://localhost:3000` — you'll see the Login page first.
 
 ---
 
-## 🛂 Admin Access (Sample)
+## 🔐 Sample Admin Login
 
-```text
+```
 Email: admin@example.com
 Password: admin123
 ```
 
-> Modify these credentials manually in MongoDB or use a seed script to insert admin data.
+> You can insert admin manually in MongoDB or via seed script.
 
 ---
 
 ## 🚀 Deployment Overview
 
-| Component     | Platform      | Description                    |
-|---------------|---------------|--------------------------------|
-| Frontend      | Vercel        | Auto CI/CD from GitHub         |
-| Backend API   | Render        | Node/Express REST API          |
-| Database      | MongoDB Atlas | Cloud-hosted NoSQL DB          |
-| Image Uploads | Cloudinary    | Stores designs & product images|
-| Payments      | Stripe        | Secure checkout                |
+| Component   | Platform    | Description                         |
+|-------------|-------------|-------------------------------------|
+| Frontend    | Vercel      | CI/CD from GitHub                   |
+| Backend     | Render      | RESTful Node.js API                 |
+| Database    | MongoDB Atlas | Secure cloud NoSQL               |
+| Image Upload| Cloudinary  | For design and product images       |
+| Payments    | Stripe      | Secure online payments              |
 
 ---
 
-## 📌 Project Highlights
+## ✅ Highlights
 
-- ✅ Full JWT authentication system (Login/Register/Logout)
-- ✅ Cloudinary-powered image upload + preview
-- ✅ Cart, Checkout & Stripe integration
-- ✅ Admin Dashboard (CRUD + order tracking)
-- ✅ Mobile-first responsive layout (100% device friendly)
-- ✅ Full-stack deployed to production
+- 🔒 Login-first with full JWT protection
+- 📱 Fully mobile-friendly & responsive (TailwindCSS)
+- 🧵 Custom design uploads with live preview
+- 🧺 Cart & Stripe-powered secure checkout
+- 👨‍💼 Admin panel with product & order management
+- 🌐 Deployed on Vercel + Render
 
 ---
 
 ## 📌 Credits
 
-This project was designed, developed, and deployed by the **Web Development Team at Zaalima Development Pvt. Ltd.** as part of a digital transformation solution for the modern clothing customization industry. It ensures a smooth end-to-end experience from customer design upload to admin-controlled order dispatch.
+This project was designed and developed by the **Web Development Team at Zaalima Development Pvt. Ltd.**, Bangalore, under the product name **StichStudio** to simplify and digitize the custom clothing design process.
 
 ---
 
-> **Note:** All APIs are RESTful, and the UI follows accessibility and responsive design best practices. All code is modular, scalable, and version-controlled using Git and GitHub.
-
----
+> 💡 Tip: All frontend routes are protected using PrivateRoute and backend APIs are secured with JWT middleware for maximum data privacy.

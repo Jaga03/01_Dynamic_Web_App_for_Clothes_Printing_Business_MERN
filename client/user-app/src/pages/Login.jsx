@@ -1,20 +1,21 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate('/');
+      console.log("Login successfull");
+      navigate("/");
     } catch (error) {
-      alert('Login failed');
+      alert("Login failed");
     }
   };
 
@@ -38,9 +39,21 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        >
           Login
         </button>
+        <p className="pt-4 text-center">
+          Don't have an account?{" "}
+          <Link
+            to="/signup"
+            className="text-blue-600 hover:underline font-medium"
+          >
+            Register here
+          </Link>
+        </p>
       </form>
     </div>
   );

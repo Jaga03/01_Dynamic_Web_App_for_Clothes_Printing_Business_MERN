@@ -71,63 +71,114 @@ Bangalore, India
 
 ```
 stichstudio/
-├── client/                          # Frontend built with React + Vite + TS
-│   ├── public/                      # Public assets accessible by browser
-│   │   ├── favicon.ico              # Browser tab icon
-│   │   └── index.html               # HTML template injected by Vite
-│   └── src/                         # All frontend source code
-│       ├── assets/                 # Images, logos, mockups, etc.
-│       ├── components/             # Reusable UI components
-│       │   ├── Navbar.tsx          # Top navigation bar
-│       │   ├── Footer.tsx          # Bottom footer
-│       │   └── PrivateRoute.tsx    # Auth-protected route wrapper
-│       ├── contexts/               # Global state providers
-│       │   ├── AuthContext.tsx     # Manages login state and JWT token
-│       │   └── CartContext.tsx     # Manages shopping cart globally
-│       ├── hooks/                  # Custom React hooks
-│       │   └── useAuth.ts          # Hook for easy access to AuthContext
-│       ├── pages/                  # Main views/routes of the app
-│       │   ├── Login.tsx           # User login page
-│       │   ├── Register.tsx        # User registration page
-│       │   ├── Home.tsx            # Homepage with product showcase
-│       │   ├── Product.tsx         # Single product details / listing
-│       │   ├── Cart.tsx            # Shopping cart page
-│       │   ├── Profile.tsx         # User profile + order history
-│       │   └── AdminDashboard.tsx  # Admin panel for managing orders/products
-│       ├── services/               # API request functions (via axios)
-│       │   ├── authService.ts      # Login, register, profile API
-│       │   ├── productService.ts   # Product-related APIs (CRUD)
-│       │   └── orderService.ts     # Order/checkout APIs
-│       ├── App.tsx                 # Main app with React Router setup
-│       └── main.tsx                # ReactDOM root entry point
+├── admin/                                  # 🛠 Admin panel (React + Vite + JS)
+│   ├── public/
+│   │   └── index.html                      # Root HTML file
+│   └── src/
+│       ├── assets/                         # Logos, icons, etc.
+│       ├── components/                     # Reusable UI parts
+│       │   ├── Sidebar.jsx                 # Admin sidebar navigation
+│       │   ├── Topbar.jsx                  # Admin top navigation
+│       │   └── ProtectedRoute.jsx          # Route protection for admin access
+│       ├── contexts/
+│       │   └── AdminAuthContext.jsx        # Context for admin authentication
+│       ├── hooks/
+│       │   └── useAdminAuth.js             # Custom hook for AdminAuthContext
+│       ├── pages/                          # All admin pages
+│       │   ├── Login.jsx                   # Admin login page
+│       │   ├── Dashboard.jsx               # Admin dashboard
+│       │   ├── Users.jsx                   # Manage users
+│       │   ├── Products.jsx                # Manage products
+│       │   ├── Orders.jsx                  # Manage orders
+│       │   └── Reports.jsx                 # Sales reports, analytics
+│       ├── services/                       # Axios service files
+│       │   ├── adminAuthService.js         # Login/logout API
+│       │   ├── adminUserService.js         # User APIs
+│       │   ├── adminProductService.js      # Product APIs
+│       │   └── adminOrderService.js        # Order APIs
+│       ├── router/
+│       │   └── index.jsx                   # React Router config
+│       ├── App.jsx                         # Main App file
+│       └── main.jsx                        # ReactDOM entry
 
-├── server/                          # Backend built with Node.js + Express
-│   ├── config/                     # External services config
-│   │   ├── cloudinary.js           # Cloudinary image upload config
-│   │   ├── db.js                   # MongoDB connection config
-│   │   └── stripe.js               # Stripe payment gateway config
-│   ├── controllers/               # Business logic separated from routes
-│   │   ├── authController.js       # Register, login, user profile logic
-│   │   ├── productController.js    # CRUD operations for products
-│   │   └── orderController.js      # Order placement, tracking logic
-│   ├── middleware/                # Custom middleware
-│   │   ├── authMiddleware.js       # JWT auth checker
-│   │   └── errorHandler.js         # Centralized error handler
-│   ├── models/                    # Mongoose schemas for MongoDB
-│   │   ├── User.js                 # User schema
-│   │   ├── Product.js              # Product schema (with variants)
-│   │   └── Order.js                # Order schema with payment info
-│   ├── routes/                    # Express REST API routes
-│   │   ├── auth.js                 # Routes for user auth
-│   │   ├── products.js             # Routes for product management
-│   │   └── orders.js               # Routes for placing and viewing orders
-│   ├── utils/                     # Utility/helper functions
-│   │   └── generateToken.js        # Generates JWT token
-│   ├── .env                        # Environment variables (PORT, DB, API keys)
-│   ├── server.js                   # Entry point for Express server
-│   └── README.md                   # Project overview and instructions
+├── client/                                 # 🌐 Customer-facing app (React + Vite + JS)
+│   ├── public/
+│   │   └── index.html                      # Root HTML for user app
+│   └── src/
+│       ├── assets/                         # Logos, icons, product images
+│       ├── components/
+│       │   ├── Navbar.jsx
+│       │   ├── Footer.jsx
+│       │   └── PrivateRoute.jsx
+│       ├── contexts/
+│       │   ├── AuthContext.jsx
+│       │   └── CartContext.jsx
+│       ├── hooks/
+│       │   └── useAuth.js
+│       ├── pages/
+│       │   ├── Home.jsx
+│       │   ├── Product.jsx
+│       │   ├── Cart.jsx
+│       │   ├── Login.jsx
+│       │   ├── Register.jsx
+│       │   ├── Profile.jsx
+│       │   └── AdminDashboard.jsx          # Shortcut link to admin
+│       ├── services/
+│       │   ├── authService.js
+│       │   ├── productService.js
+│       │   └── orderService.js
+│       ├── App.jsx
+│       └── main.jsx
+
+├── server/                                 # 🔧 Backend (Node.js + Express + MongoDB)
+│   ├── config/
+│   │   ├── db.js                           # MongoDB connection
+│   │   ├── cloudinary.js                   # Cloudinary image upload config
+│   │   └── stripe.js                       # Stripe config
+│   ├── controllers/
+│   │   ├── authController.js               # User auth logic
+│   │   ├── productController.js            # Product logic
+│   │   ├── orderController.js              # Order logic
+│   │   └── adminController.js              # Admin-specific logic
+│   ├── middleware/
+│   │   ├── authMiddleware.js               # JWT checker
+│   │   ├── adminMiddleware.js              # Admin access checker
+│   │   └── errorHandler.js                 # Central error handler
+│   ├── models/
+│   │   ├── User.js                         # User schema
+│   │   ├── Product.js                      # Product schema
+│   │   └── Order.js                        # Order schema
+│   ├── routes/
+│   │   ├── auth.js                         # User routes
+│   │   ├── products.js                     # Product routes
+│   │   ├── orders.js                       # Order routes
+│   │   └── admin.js                        # Admin-only routes
+│   ├── utils/
+│   │   └── generateToken.js                # JWT token generation
+│   ├── .env                                # Env variables
+│   ├── server.js                           # Express entry point
+│   └── README.md                           # Backend docs
+
+├── package.json                            # Dependency declarations
+├── .gitignore                              # Ignore node_modules, .env
+├── README.md                               # Project overview
+├── vite.config.js                          # Vite config for client/admin
+└── jsconfig.json                           # JS path configs (optional)
 
 ```
+| Folder/File                      | Purpose                           |
+| -------------------------------- | --------------------------------- |
+| `admin/`                         | Admin dashboard (React)           |
+| `client/`                        | User-facing shopping site         |
+| `server/`                        | Node.js + Express backend         |
+| `routes/admin.js`                | Secured admin-only backend routes |
+| `middleware/adminMiddleware.js`  | Checks if logged-in user is admin |
+| `controllers/adminController.js` | Logic to get users, stats, etc.   |
+| `components/Sidebar.jsx` (admin) | Navigation menu for admin panel   |
+| `pages/Dashboard.jsx` (admin)    | Summary of site activities        |
+| `services/`                      | Axios-based API communication     |
+| `contexts/`                      | State and auth management         |
+| `.env`                           | Environment variables for server  |
 
 ---
 

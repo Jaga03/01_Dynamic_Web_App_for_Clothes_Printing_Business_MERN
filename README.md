@@ -71,59 +71,62 @@ Bangalore, India
 
 ```
 stichstudio/
-├── client/                         # React Frontend
-│   ├── public/                     # Public static assets (favicon, index.html)
-│   └── src/
-│       ├── assets/                # Static images and mockups
-│       ├── components/            # Shared components
-│       │   ├── Navbar.tsx
-│       │   ├── Footer.tsx
-│       │   └── PrivateRoute.tsx
-│       ├── contexts/              # Auth & Cart Context Providers
-│       │   ├── AuthContext.tsx
-│       │   └── CartContext.tsx
-│       ├── hooks/                 # Custom React hooks
-│       │   └── useAuth.ts
-│       ├── pages/                 # Main page views
-│       │   ├── Login.tsx
-│       │   ├── Register.tsx
-│       │   ├── Home.tsx
-│       │   ├── Product.tsx
-│       │   ├── Cart.tsx
-│       │   ├── Profile.tsx
-│       │   └── AdminDashboard.tsx
-│       ├── services/              # Axios API services
-│       │   ├── authService.ts
-│       │   ├── productService.ts
-│       │   └── orderService.ts
-│       ├── App.tsx                # Application routing
-│       └── main.tsx               # React DOM render
-│
-├── server/                         # Node Backend
-│   ├── config/                    # Cloudinary, Stripe, DB config
-│   │   ├── cloudinary.js
-│   │   ├── db.js
-│   │   └── stripe.js
-│   ├── controllers/              # Business logic
-│   │   ├── authController.js
-│   │   ├── productController.js
-│   │   └── orderController.js
-│   ├── middleware/               # JWT protection, error handlers
-│   │   ├── authMiddleware.js
-│   │   └── errorHandler.js
-│   ├── models/                   # Mongoose schemas
-│   │   ├── User.js
-│   │   ├── Product.js
-│   │   └── Order.js
-│   ├── routes/                   # Express REST API routes
-│   │   ├── auth.js
-│   │   ├── products.js
-│   │   └── orders.js
-│   ├── utils/                    # Token helpers, validators
-│   │   └── generateToken.js
-│   ├── .env                      # Environment config
-│   ├── server.js                 # Entry point
-│   └── README.md
+├── client/                          # Frontend built with React + Vite + TS
+│   ├── public/                      # Public assets accessible by browser
+│   │   ├── favicon.ico              # Browser tab icon
+│   │   └── index.html               # HTML template injected by Vite
+│   └── src/                         # All frontend source code
+│       ├── assets/                 # Images, logos, mockups, etc.
+│       ├── components/             # Reusable UI components
+│       │   ├── Navbar.tsx          # Top navigation bar
+│       │   ├── Footer.tsx          # Bottom footer
+│       │   └── PrivateRoute.tsx    # Auth-protected route wrapper
+│       ├── contexts/               # Global state providers
+│       │   ├── AuthContext.tsx     # Manages login state and JWT token
+│       │   └── CartContext.tsx     # Manages shopping cart globally
+│       ├── hooks/                  # Custom React hooks
+│       │   └── useAuth.ts          # Hook for easy access to AuthContext
+│       ├── pages/                  # Main views/routes of the app
+│       │   ├── Login.tsx           # User login page
+│       │   ├── Register.tsx        # User registration page
+│       │   ├── Home.tsx            # Homepage with product showcase
+│       │   ├── Product.tsx         # Single product details / listing
+│       │   ├── Cart.tsx            # Shopping cart page
+│       │   ├── Profile.tsx         # User profile + order history
+│       │   └── AdminDashboard.tsx  # Admin panel for managing orders/products
+│       ├── services/               # API request functions (via axios)
+│       │   ├── authService.ts      # Login, register, profile API
+│       │   ├── productService.ts   # Product-related APIs (CRUD)
+│       │   └── orderService.ts     # Order/checkout APIs
+│       ├── App.tsx                 # Main app with React Router setup
+│       └── main.tsx                # ReactDOM root entry point
+
+├── server/                          # Backend built with Node.js + Express
+│   ├── config/                     # External services config
+│   │   ├── cloudinary.js           # Cloudinary image upload config
+│   │   ├── db.js                   # MongoDB connection config
+│   │   └── stripe.js               # Stripe payment gateway config
+│   ├── controllers/               # Business logic separated from routes
+│   │   ├── authController.js       # Register, login, user profile logic
+│   │   ├── productController.js    # CRUD operations for products
+│   │   └── orderController.js      # Order placement, tracking logic
+│   ├── middleware/                # Custom middleware
+│   │   ├── authMiddleware.js       # JWT auth checker
+│   │   └── errorHandler.js         # Centralized error handler
+│   ├── models/                    # Mongoose schemas for MongoDB
+│   │   ├── User.js                 # User schema
+│   │   ├── Product.js              # Product schema (with variants)
+│   │   └── Order.js                # Order schema with payment info
+│   ├── routes/                    # Express REST API routes
+│   │   ├── auth.js                 # Routes for user auth
+│   │   ├── products.js             # Routes for product management
+│   │   └── orders.js               # Routes for placing and viewing orders
+│   ├── utils/                     # Utility/helper functions
+│   │   └── generateToken.js        # Generates JWT token
+│   ├── .env                        # Environment variables (PORT, DB, API keys)
+│   ├── server.js                   # Entry point for Express server
+│   └── README.md                   # Project overview and instructions
+
 ```
 
 ---

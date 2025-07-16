@@ -1,42 +1,33 @@
-import { createContext, useState, useEffect } from 'react';
-import { api } from '../lib/Api';
+// ✅ contexts/AuthContext.jsx
+import { createContext, useContext, useState } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token'));
-
-  useEffect(() => {
-    if (token) {
-      api.get('/auth/profile', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(res => setUser(res.data))
-      .catch(() => logout());
-    }
-  }, [token]);
 
   const login = async (email, password) => {
-    const res = await api.post('/auth/login', { email, password });
+    const res = await axios.post('/api/auth/login', { email, password });
     setUser(res.data);
   };
 
   const register = async (name, email, password) => {
-    const res = await api.post('/auth/signup', { fullName:name, email, password });
+    const res = await axios.post('/api/auth/register', { name, email, password });
     setUser(res.data);
   };
 
-  const logout = () => {
-    setUser(null);
-    setToken(null);
-  };
+  const logout = () => setUser(null);
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-export default AuthContext;
+function useAuth() {
+  return useContext(AuthContext);
+}
+
+export { AuthProvider, useAuth };

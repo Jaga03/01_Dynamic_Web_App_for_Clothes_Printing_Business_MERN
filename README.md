@@ -131,7 +131,7 @@ stichstudio/
 │       └── main.jsx
 
 ├── server/                                 # 🔧 Backend (Node.js + Express + MongoDB)
-│   ├── config/
+│   ├── lib/
 │   │   ├── db.js                           # MongoDB connection
 │   │   ├── cloudinary.js                   # Cloudinary image upload config
 │   │   └── stripe.js                       # Stripe config

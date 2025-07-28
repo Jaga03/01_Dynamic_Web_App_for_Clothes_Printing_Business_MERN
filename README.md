@@ -1,4 +1,4 @@
-# 👕 StichStudio – Custom Clothes Printing Web Application
+# 👕 Teezy – Custom Clothes Printing Web Application
 
 A fully responsive, secure, and user-friendly e-commerce platform developed for **Zaalima Development Pvt. Ltd.**, where users must first log in or register to access the application. Customers can personalize apparel by uploading custom designs, preview them on clothing mockups, and place orders. Admins can manage products and update order statuses. Built using the **MERN Stack**, integrated with **Cloudinary** for image uploads and **Stripe** for secure payments.
 
